@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why Shenzhen Tests 500 Ideas</title>
+<title>Why Shenzhen Tests Hundreds of Ideas</title>
 <meta name="description" content="A paper-style, interactive reading of bunnie Huang's The Hardware Hacker: the round trip, gongkai, and why a Shenzhen team can put hundreds of ideas in front of users each year.">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+JP:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -143,6 +143,9 @@ table.bt{border-collapse:collapse;margin:0 auto;font-size:14.5px;font-variant-nu
 .bt .r{text-align:right;white-space:nowrap}
 .bt .c{text-align:center;color:var(--wire)}
 .bt .no{font-style:italic;color:var(--mute)}
+#tab3 .bt{font-size:14px}
+#tab3 .bt th,#tab3 .bt td{padding:4px 9px}
+#tab3 .bt td:first-child{white-space:nowrap}
 
 /* fig 1: network */
 .net{min-width:580px;width:100%;height:auto;display:block}
@@ -298,10 +301,10 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
 </style>
 </head>
 <body>
-<div class="rh" id="rh"><div class="in"><span class="sc">J. Li · <b>Why a Shenzhen team can test 500 ideas a year</b></span><span class="sc" id="rhs"></span></div><div class="bar" id="bar"></div></div>
+<div class="rh" id="rh"><div class="in"><span class="sc">J. Li · <b>Why a Shenzhen team can test hundreds of ideas a year</b></span><span class="sc" id="rhs"></span></div><div class="bar" id="bar"></div></div>
 <div class="page">
 
-  <nav class="top"><a href="../index.html">← Notes on the Agent Era</a><span>v2 · <a href="#cite">cite</a></span></nav>
+  <nav class="top"><a href="../index.html">← Notes on the Agent Era</a><span>v3 · <a href="#cite">cite</a></span></nav>
 
   <aside class="toc">
     <b class="sc">Contents</b>
@@ -320,16 +323,16 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
   <main>
     <header class="tb">
       <span class="lab">① Essay <i>hardware · Shenzhen</i></span>
-      <h1>Why a Shenzhen Team Can Test 500 Ideas a Year</h1>
+      <h1>Why a Shenzhen Team Can Test Hundreds of Ideas a Year</h1>
       <p class="sub">Round trips, gongkai and the price of a question: an interactive reading of Huang's <em>The Hardware Hacker</em></p>
       <p class="au">Jimmy Li</p>
       <p class="af">Notes on the Agent Era</p>
-      <p class="dt">6 November 2026 · v2</p>
+      <p class="dt">6 November 2026 · v3</p>
     </header>
 
     <section class="abs">
       <h2 class="sc">Abstract</h2>
-      <p>Shenzhen's lead in hardware is usually explained by cost. Following Huang <a class="xr" href="#r1">[1]</a>, this essay argues that its real advantage is the <em>price of a question</em>: the time and money it takes to ask a supplier something and hold the answer. I model product development as a network of suppliers (§2), define the round trip as its unit of progress (§3), and show how gongkai reference designs lower the cost of a first working unit (§4). Together these give a simple bound on how many ideas a team can put in front of users in a year. Under illustrative parameters the bound moves from about twenty to several hundred (§5). Since only users can say whether a product is wanted, the number of tries matters more than the speed of any single one. Every figure is interactive. All parameters are illustrative and listed in Appendix <a class="xr" href="#appA">A</a>.</p>
+      <p>Shenzhen's lead in hardware is usually explained by cost. Following Huang <a class="xr" href="#r1">[1]</a>, this essay argues that its real advantage is the <em>price of a question</em>: the time and money it takes to ask a supplier something and hold the answer. I model product development as a network of suppliers (§2), define the round trip as its unit of progress (§3), and show how gongkai reference designs lower the cost of a first working unit (§4). Together these give a simple bound on how many ideas a team can put in front of users in a year. With published prices and lead times, the bound runs from about 26 ideas a year for a team that needs a new mould for every idea to about 300 for a Shenzhen team that reuses market parts and housings (§5). Reuse explains most of that gap. Being in Shenzhen roughly doubles what reuse allows, and more when ideas need debugging. Since only users can say whether a product is wanted, the number of tries matters more than the speed of any single one. Every figure is interactive. Appendix <a class="xr" href="#appA">A</a> gives the source of every input, or marks it as an assumption.</p>
     </section>
     <p class="kw"><i>Keywords:</i> hardware innovation; industrial clusters; Shenzhen; gongkai; iteration cost.</p>
 
@@ -342,7 +345,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
       <h2 class="sc">Claims at a glance</h2>
       <ol>
         <li><code>C1</code><span>The round trip to a supplier is the unit of progress, and in Shenzhen it takes hours, not weeks.</span><a class="xr" href="#p1">Prop. 1</a></li>
-        <li><code>C2</code><span>Cheap round trips and gongkai designs let a team test hundreds of ideas a year instead of tens.</span><a class="xr" href="#p2">Prop. 2</a></li>
+        <li><code>C2</code><span>Reusing market parts, reference designs and housings lets a team test hundreds of ideas a year instead of a few dozen. Proximity roughly doubles that.</span><a class="xr" href="#p2">Prop. 2</a></li>
         <li><code>C3</code><span>Speed settles <em>does it work</em> and <em>can it be made</em>. Only users settle <em>does anyone want it</em>.</span><a class="xr" href="#p3">Prop. 3</a></li>
       </ol>
     </section>
@@ -354,10 +357,10 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
       <p>This essay restates that argument as a small model. It makes three claims, each stated as a proposition and each paired with a figure you can operate:</p>
       <ol>
         <li>The unit of progress in hardware is the round trip to a supplier. In Shenzhen it takes hours rather than weeks (<a class="xr" href="#p1">Proposition 1</a>, §3).</li>
-        <li>Market parts and gongkai reference designs make an idea cheap enough that a team can put hundreds a year in front of users (<a class="xr" href="#p2">Proposition 2</a>, §§4–5).</li>
+        <li>Market parts, gongkai reference designs and stock housings let most ideas reuse what already exists. With published prices, reuse lifts a small team from a few dozen tested ideas a year to a few hundred, and being in Shenzhen roughly doubles that (<a class="xr" href="#p2">Proposition 2</a>, §§4–5).</li>
         <li>Speed settles whether a product works and whether it can be made. Only users settle whether anyone wants it, so the number of tries is what matters (<a class="xr" href="#p3">Proposition 3</a>, §5.2).</li>
       </ol>
-      <p><em>Reading guide.</em> Figures tagged <span class="sc" style="color:var(--wire)">interactive</span> respond to input, and most evaluate their equation as you go. The numbers are illustrative, chosen to show the shape of the argument; Appendix <a class="xr" href="#appA">A</a> lists them. Hover over any cross-reference, such as <a class="xr" href="#eq4">(4)</a>, <a class="xr" href="#r3">[3]</a> or a footnote mark, to preview it.</p>
+      <p><em>Reading guide.</em> Figures tagged <span class="sc" style="color:var(--wire)">interactive</span> respond to input, and most evaluate their equation as you go. Inputs come from published prices and lead times where they exist. The rest are marked as assumptions, and Appendix <a class="xr" href="#appA">A</a> lists both. Hover over any cross-reference, such as <a class="xr" href="#eq4">(4)</a>, <a class="xr" href="#r3">[3]</a> or a footnote mark, to preview it.</p>
 
       <!-- 2 -->
       <h2 id="s2"><span class="n">2</span>The supply network</h2>
@@ -400,7 +403,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
       <h2 id="s3"><span class="n">3</span>The round trip</h2>
       <div class="thm def" id="d2"><span class="h">Definition 2</span> (Round trip). A round trip is the time <span data-tex="\tau">τ</span> from asking a supplier a question to holding the answer: a part, a board or a measurement. A debugging loop of <i>K</i> steps has cycle time <span data-tex="T">T</span>, given by <a class="xr" href="#eq1">(1)</a>.</div>
       <div class="eq" id="eq1"><div class="m" data-tex="T=\sum_{k=1}^{K}\tau_k">T = Σ τₖ (k = 1 … K)</div><span class="no">(1)</span></div>
-      <p class="ni">Huang's Shenzhen is a place where you go and look <a class="xr" href="#r1">[1]</a>. You walk the floors of the Huaqiangbei (华强北) electronics markets and leave with parts the same afternoon. You stand on the factory floor while your board goes through the line. In practice the factory engineer is also a WeChat contact, messaged many times a day. None of this lowers a unit price. All of it shortens <span data-tex="\tau">τ</span>.</p>
+      <p class="ni">Huang's Shenzhen is a place where you go and look <a class="xr" href="#r1">[1]</a>. You walk the floors of the Huaqiangbei (华强北) electronics markets and leave with parts the same afternoon. You stand on the factory floor while your board goes through the line. In practice the factory engineer is also a WeChat contact, messaged many times a day. HAX, which runs a hardware accelerator in Huaqiangbei, says its startups can get components within hours <a class="xr" href="#r6">[6]</a>, and one of its partners described a week in Shenzhen as worth a month anywhere else <a class="xr" href="#r5">[5]</a>. None of this lowers a unit price. All of it shortens <span data-tex="\tau">τ</span>.</p>
       <div class="thm prop" id="p1"><span class="h">Proposition 1</span> (Round trip) <code>C1</code>. <span class="b">In Shenzhen the round trip to a supplier is measured in hours rather than weeks. This, more than unit price, is the source of its speed.</span></div>
 
       <h3 id="s3-1"><span class="n">3.1</span>A worked example</h3>
@@ -456,23 +459,26 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
 
       <!-- 5 -->
       <h2 id="s5"><span class="n">5</span>How many ideas a year</h2>
-      <p>Sections 3 and 4 lower two different numbers: the days <i>d</i> one test cycle takes, and the cost <i>c</i> of putting one idea in front of users. Let <i>B</i> be a yearly budget, <i>k</i> the number of parallel tracks a team can run, and <span data-tex="D=300">D = 300</span> the working days in a year. The number of ideas a team can test in a year is</p>
+      <p>Sections 3 and 4 lower two different numbers: the days <i>d</i> one test cycle takes, and the cost <i>c</i> of putting one idea in front of users. Let <i>B</i> be a yearly budget, <i>k</i> the number of parallel tracks a team can run, and <span data-tex="D=250">D = 250</span> the working days in a year (52 five-day weeks, less about ten public holidays). The number of ideas a team can test in a year is</p>
       <div class="eq" id="eq4"><div class="m" data-tex="N=\min\!\left(\left\lfloor \frac{B}{c}\right\rfloor,\ \left\lfloor \frac{kD}{d}\right\rfloor\right)">N = min(⌊B / c⌋, ⌊kD / d⌋)</div><span class="no">(4)</span></div>
       <p class="ni">The first term is the money limit and the second is the time limit. A team is bound by whichever is smaller, and only lowering that one helps: a cheaper idea does nothing for a team that is short of time.</p>
+      <p>To put numbers on <i>c</i> and <i>d</i>, two kinds of idea need separating. Most ideas can <em>reuse</em> what already exists: a market module, a reference board, a stock or public-mould housing. Some need a part made just for them, usually an injection mould. <a class="xr" href="#tab3">Table 3</a> prices both kinds, in Shenzhen and from abroad, using published figures. Take one idea to be a batch of ten working units. Built from reused parts in Shenzhen it costs about $212 and takes about five working days. Boards start at $2 for five with an $8 assembly setup fee <a class="xr" href="#r7">[7]</a>, assembly takes two to three days <a class="xr" href="#r8">[8]</a>, and parts come from the market within hours <a class="xr" href="#r6">[6]</a>. Ordered from abroad, the same batch adds a 3–5 day courier leg <a class="xr" href="#r9">[9]</a>, so about nine days. An idea that needs its own aluminium prototype mould adds $2,000–5,000 and 2–4 weeks of tooling <a class="xr" href="#r12">[12]</a>, wherever the team is.</p>
 
       <h3 id="s5-1"><span class="n">5.1</span>Hits</h3>
       <p>Most ideas fail. If users want each idea independently with probability <i>p</i>, the number of hits <i>H</i> satisfies</p>
       <div class="eq" id="eq5"><div class="m" data-tex="\mathbb{E}[H]=Np">E[H] = Np</div><span class="no">(5)</span></div>
       <div class="eq" id="eq6"><div class="m" data-tex="P(H\ge 1)=1-(1-p)^{N}">P(H ≥ 1) = 1 − (1 − p)^N</div><span class="no">(6)</span></div>
-      <div class="thm prop" id="p2"><span class="h">Proposition 2</span> (Number of tries) <code>C2</code>. <span class="b">Under Shenzhen-like parameters <i>N</i> is in the hundreds. Under remote parameters it is in the tens. At <span data-tex="p=2\%">p = 2%</span>, a remote team has about a one-in-three chance of a single hit in a year, while a Shenzhen team almost certainly finds several.</span></div>
-      <div class="proof"><i>Proof sketch.</i> With the values in <a class="xr" href="#tab3">Table 3</a>, <a class="xr" href="#eq4">(4)</a> gives <span data-tex="N=\min(375,360)=360">N = min(375, 360) = 360</span> for the Shenzhen team and <span data-tex="N=\min(25,20)=20">N = min(25, 20) = 20</span> for the remote team. Then <a class="xr" href="#eq6">(6)</a> gives <span data-tex="1-0.98^{20}\approx 0.33">1 − 0.98²⁰ ≈ 0.33</span> and <span data-tex="1-0.98^{360}\approx 0.999">1 − 0.98³⁶⁰ ≈ 0.999</span>, and <a class="xr" href="#eq5">(5)</a> gives expected hits of 0.4 and 7.2. <span class="qed">∎</span></div>
+      <div class="thm prop" id="p2"><span class="h">Proposition 2</span> (Reuse and proximity) <code>C2</code>. <span class="b">With the published prices and lead times in Table 3, a team running six tracks on $100k a year can test about 300 reuse-based ideas a year in Shenzhen and about 166 from abroad. If every idea needs its own mould, it can test only about 26–27, wherever it is. Reuse accounts for most of the gap, and proximity roughly doubles what reuse allows.</span></div>
+      <div class="proof"><i>Proof sketch.</i> With the values in <a class="xr" href="#tab3">Table 3</a>, <a class="xr" href="#eq4">(4)</a> gives <span data-tex="\min(471,300)=300">min(471, 300) = 300</span> for reuse in Shenzhen and <span data-tex="\min(381,166)=166">min(381, 166) = 166</span> for reuse from abroad, both limited by time. With a new mould it gives <span data-tex="\min(27,83)=27">min(27, 83) = 27</span> and <span data-tex="\min(26,68)=26">min(26, 68) = 26</span>, both limited by money. At <span data-tex="p=2\%">p = 2%</span>, <a class="xr" href="#eq6">(6)</a> gives chances of at least one hit of 99.8%, 96.5%, 42% and 41%. <span class="qed">∎</span></div>
+      <p>The factor of two for proximity is a lower bound. Real prototypes rarely work the first time. If every idea also needs one debugging loop like the one in Figure 2, <i>d</i> rises to about 7 days in Shenzhen and about 34 from abroad. <i>N</i> then falls to 214 and 44, a factor of about five.</p>
 
       <figure id="fig4">
         <div class="fig"><span class="tag">interactive</span>
           <div class="presets" id="presets">
-            <button data-p="sz" aria-pressed="true">Shenzhen team</button>
-            <button data-p="rm">Remote startup</button>
-            <button data-p="corp">Large company</button>
+            <button data-p="sz" aria-pressed="true">Shenzhen · reuse</button>
+            <button data-p="rm">Abroad · reuse</button>
+            <button data-p="szm">Shenzhen · new mould</button>
+            <button data-p="rmm">Abroad · new mould</button>
           </div>
           <div class="sl"><label for="cost">cost per idea, <i>c</i></label><input type="range" id="cost" min="0" max="100"><output id="costO"></output></div>
           <div class="sl"><label for="days">days per cycle, <i>d</i></label><input type="range" id="days" min="2" max="90"><output id="daysO"></output></div>
@@ -491,7 +497,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
           <div class="live"><small>equations (4) and (6), evaluated</small><div id="eq4l"></div></div>
           <p class="why" id="why4"></p>
         </div>
-        <figcaption><span class="fl">Figure 4.</span> Cost and speed set the number of tries. (a) Each dot is one idea put in front of users. Blue dots are tested; amber dots are ideas users wanted. (b) The chance of at least one hit, <a class="xr" href="#eq6">(6)</a>, with the remote (<i>N</i> = 20) and Shenzhen (<i>N</i> = 360) teams marked and your current <i>N</i> in amber.</figcaption>
+        <figcaption><span class="fl">Figure 4.</span> Cost and speed set the number of tries. (a) Each dot is one idea put in front of users. Blue dots are tested; amber dots are ideas users wanted. (b) The chance of at least one hit, <a class="xr" href="#eq6">(6)</a>, with the presets from <a class="xr" href="#tab3">Table 3</a> marked (new mould <i>N</i> ≈ 26, abroad 166, Shenzhen 300) and your current <i>N</i> in amber.</figcaption>
       </figure>
 
       <h3 id="s5-2"><span class="n">5.2</span>What speed cannot buy</h3>
@@ -510,7 +516,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
           <div class="live"><small>remaining uncertainty, evaluated</small><div id="eq5l"></div></div>
           <p class="why" id="why5"></p>
         </div>
-        <figcaption><span class="fl">Figure 5.</span> Three kinds of uncertainty (<a class="xr" href="#p3">Proposition 3</a>). Drag the iterations slider as far as you like: the demand bar moves only with user trials. Decay rates are illustrative (Appendix <a class="xr" href="#appA">A</a>).</figcaption>
+        <figcaption><span class="fl">Figure 5.</span> Three kinds of uncertainty (<a class="xr" href="#p3">Proposition 3</a>). Drag the iterations slider as far as you like: the demand bar moves only with user trials. Decay rates are assumptions (Appendix <a class="xr" href="#appA">A</a>).</figcaption>
       </figure>
       <div class="thm rem" id="rem1"><span class="h">Remark 1.</span> Faster manufacturing doesn't guarantee market success. It lowers the price of a question. You still have to ask good questions, and listen to the answers.</div>
 
@@ -548,7 +554,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
         </div>
         <figcaption><span class="fl">Figure 6.</span> The product loop feeds the ecosystem loop, and the ecosystem loop feeds the next product. Each finished lap applies <a class="xr" href="#eq7">(7)</a> once.</figcaption>
       </figure>
-      <p>This is why so much design innovation comes out of Shenzhen. Its designers aren't cleverer. They get more tries, the city remembers what every earlier try taught it, and the two effects compound. A designer who has watched five hundred ideas meet real users develops different instincts from one who has watched twenty.</p>
+      <p>This is why so much design innovation comes out of Shenzhen. Its designers aren't cleverer. They get more tries, the city remembers what every earlier try taught it, and the two effects compound. A designer who has watched hundreds of ideas meet real users develops different instincts from one who has watched a few dozen.</p>
 
       <!-- 7 -->
       <h2 id="s7"><span class="n">7</span>Limitations</h2>
@@ -558,6 +564,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
         <li>Complex, high-volume or high-quality products are limited by process capability, not distance.</li>
         <li>Critical inputs such as leading-edge chips may come from distant suppliers anyway.</li>
         <li>Concentration amplifies regional shocks. Inventory and second sources are the buffer.</li>
+        <li>Most published prices and lead times come from vendor pages and accelerator material, not independent measurements. Treat Table 3 as order-of-magnitude, and get quotes before relying on any single number.</li>
       </ul>
       <p>It is also tempting to call Shenzhen the GitHub of hardware. <a class="xr" href="#tab2">Table 2</a> shows where the analogy holds and where it breaks.</p>
       <div class="tbl" id="tab2">
@@ -575,7 +582,7 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
 
       <!-- 8 -->
       <h2 id="s8"><span class="n">8</span>Conclusion</h2>
-      <p>Closer connections lower the cost of each test. More tests teach the cluster, and the cluster makes the next test cheaper. Read this way, Huang's Shenzhen isn't a cheaper factory but a cheaper question. That is why a team there can test hundreds of ideas a year while others test twenty.</p>
+      <p>Closer connections lower the cost of each test. More tests teach the cluster, and the cluster makes the next test cheaper. Read this way, Huang's Shenzhen isn't a cheaper factory but a cheaper question. The published numbers add one refinement. Most of the gain comes from not having to make anything new for each idea, and Shenzhen is where reusing is easiest and each round trip is shortest. That is why a team there can test hundreds of ideas a year, while a team that tools every idea tests a few dozen.</p>
 
       <h2 id="refs"><span class="n"></span>References</h2>
       <ol class="refs">
@@ -583,25 +590,45 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
         <li id="r2"><span>[2]</span><span>A. Huang. "The $12 Gongkai Phone." <a href="https://www.bunniestudios.com/blog/2013/the-12-gongkai-phone/">bunniestudios.com</a>, 2013.</span></li>
         <li id="r3"><span>[3]</span><span>A. Marshall. <em>Principles of Economics</em>, Book IV, ch. X, "The concentration of specialized industries in particular localities". Macmillan, 1890.</span></li>
         <li id="r4"><span>[4]</span><span>M. E. Porter. "Clusters and the new economics of competition." <em>Harvard Business Review</em>, 76(6), 1998.</span></li>
+        <li id="r5"><span>[5]</span><span>K. Chan (Associated Press). "Edible worms, pingpong bots: Startups find mecca in Shenzhen." <a href="https://phys.org/news/2016-05-edible-worms-pingpong-bots-startups.html">phys.org</a>, 19 May 2016.</span></li>
+        <li id="r6"><span>[6]</span><span>HAX. "WIRED tours HAX Shenzhen in documentary on the 'Silicon Valley of hardware'." <a href="https://hax.co/blog/inside-shenzhen-the-silicon-valley-of-hardware-by-wired">hax.co</a>, 1 October 2019.</span></li>
+        <li id="r7"><span>[7]</span><span>LCSC / JLCPCB. "PCB Assembly (PCBA) Services": boards from $2 for 5 pcs, assembly setup fee from $8. <a href="https://lcsc.com/pcba">lcsc.com/pcba</a>, accessed November 2026.</span></li>
+        <li id="r8"><span>[8]</span><span>JLCPCB. "Low-cost and rapid PCB prototype assembly service": assembly within 2–3 days. <a href="https://jlcpcb.com/blog/low-cost-and-rapid-prototype-pcb-assembly-service">jlcpcb.com</a>, November 2025, updated September 2026.</span></li>
+        <li id="r9"><span>[9]</span><span>ExFreight. "How long does it take to ship from China to the US?": DHL Express 3–5 days. <a href="https://www.exfreight.com/how-long-does-it-take-to-ship-from-china-to-the-us/">exfreight.com</a>, February 2025.</span></li>
+        <li id="r10"><span>[10]</span><span>CircuitHub. "ProtoBoard": turnkey prototypes in as little as 3 days. <a href="https://circuithub.com/rapid-prototyping">circuithub.com</a>, accessed November 2026.</span></li>
+        <li id="r11"><span>[11]</span><span>MacroFab. "MacroFab now offers 10-day turnaround." <a href="https://www.macrofab.com/blog/macrofab-now-offers-10-day-prototyping">macrofab.com</a>, October 2017.</span></li>
+        <li id="r12"><span>[12]</span><span>D. Thompson. "Injection molding for hardware startups: from prototype to mass production": aluminium prototype moulds $2,000–5,000, 2–4 weeks. <a href="https://cm-astro-landingpage.pages.dev/en/blog/injection-molding-hardware-startups">CoreLMould</a>, May 2026.</span></li>
+        <li id="r13"><span>[13]</span><span>M. Brown. "The hardware product development process: 7 stages from concept to mass production": prototyping and iteration $5,000–40,000 over 4–12 weeks. <a href="https://www.cadcrowd.com/blog/?p=50384">Cad Crowd</a>, August 2026.</span></li>
+        <li id="r14"><span>[14]</span><span>K. Victory, M. Nenycz-Thiel, J. Dawes, A. Tanusondjaja and A. M. Corsi. "How common is new product failure and when does it vary?" <em>Marketing Letters</em>, 32(1):17–32, 2021.</span></li>
       </ol>
 
       <h2 id="appA"><span class="n">A</span>Parameters</h2>
-      <p>Every number in this essay is illustrative. The numbers were chosen to make the mechanisms visible, not measured.</p>
+      <p>Table 3 builds the Figure 4 presets from published prices and lead times. One idea is a batch of ten working units. Where a figure has a source, the last column cites it; where it doesn't, the column says <em>assumption</em>. Times are working days. Tooling runs in parallel with board assembly, so a cycle is the longer of the two, plus shipping and two days of user testing, rounded up.</p>
       <div class="tbl" id="tab3">
-        <p class="cap"><span class="fl">Table 3.</span> Team parameters for (4)–(6) and the presets in Figure 4.</p>
+        <p class="cap"><span class="fl">Table 3.</span> Inputs to (4)–(6) and the presets in Figure 4.</p>
         <table class="bt">
-          <thead><tr><th>Parameter</th><th></th><th class="r">Shenzhen</th><th class="r">Remote</th><th class="r">Large co.</th></tr></thead>
+          <thead><tr><th></th><th class="r">Shenzhen<br>reuse</th><th class="r">Abroad<br>reuse</th><th class="r">Shenzhen<br>new mould</th><th class="r">Abroad<br>new mould</th><th>Source</th></tr></thead>
           <tbody>
-            <tr><td>Cost per idea</td><td><i>c</i></td><td class="r">$400</td><td class="r">$6,000</td><td class="r">$20,000</td></tr>
-            <tr><td>Days per cycle</td><td><i>d</i></td><td class="r">5</td><td class="r">30</td><td class="r">60</td></tr>
-            <tr><td>Parallel tracks</td><td><i>k</i></td><td class="r">6</td><td class="r">2</td><td class="r">4</td></tr>
-            <tr><td>Yearly budget</td><td><i>B</i></td><td class="r">$150k</td><td class="r">$150k</td><td class="r">$500k</td></tr>
-            <tr><td>Working days</td><td><i>D</i></td><td class="r">300</td><td class="r">300</td><td class="r">300</td></tr>
-            <tr><td>Hit rate</td><td><i>p</i></td><td class="r">2%</td><td class="r">2%</td><td class="r">2%</td></tr>
-            <tr class="mid"><td>Ideas per year, (4)</td><td><i>N</i></td><td class="r">360</td><td class="r">20</td><td class="r">20</td></tr>
+            <tr><td>Boards + assembly setup</td><td class="r">$12</td><td class="r">$12</td><td class="r">$12</td><td class="r">$12</td><td><a class="xr" href="#r7">[7]</a></td></tr>
+            <tr><td>Parts, 10 × $15</td><td class="r">$150</td><td class="r">$150</td><td class="r">$150</td><td class="r">$150</td><td class="no">assumption</td></tr>
+            <tr><td>Housing</td><td class="r">$50</td><td class="r">$50</td><td class="r">$3,500</td><td class="r">$3,500</td><td>stock: <span class="no">assumption</span>; mould: <a class="xr" href="#r12">[12]</a></td></tr>
+            <tr><td>Shipping and duties</td><td class="r">—</td><td class="r">$50</td><td class="r">—</td><td class="r">$50</td><td class="no">assumption</td></tr>
+            <tr class="mid"><td>Cost per idea, <i>c</i></td><td class="r">$212</td><td class="r">$262</td><td class="r">$3,662</td><td class="r">$3,712</td><td></td></tr>
+            <tr class="mid"><td>Assembly (days)</td><td class="r">2.5</td><td class="r">2.5</td><td class="r">2.5</td><td class="r">2.5</td><td><a class="xr" href="#r8">[8]</a></td></tr>
+            <tr><td>Tooling (days)</td><td class="r">—</td><td class="r">—</td><td class="r">15</td><td class="r">15</td><td><a class="xr" href="#r12">[12]</a></td></tr>
+            <tr><td>Shipping (days)</td><td class="r">0.5</td><td class="r">4.5</td><td class="r">0.5</td><td class="r">4.5</td><td><a class="xr" href="#r9">[9]</a>; local: <span class="no">assumption</span></td></tr>
+            <tr><td>User testing (days)</td><td class="r">2</td><td class="r">2</td><td class="r">2</td><td class="r">2</td><td class="no">assumption</td></tr>
+            <tr class="mid"><td>Days per cycle, <i>d</i></td><td class="r">5</td><td class="r">9</td><td class="r">18</td><td class="r">22</td><td></td></tr>
+            <tr class="mid"><td>Parallel tracks, <i>k</i></td><td class="r">6</td><td class="r">6</td><td class="r">6</td><td class="r">6</td><td class="no">assumption</td></tr>
+            <tr><td>Yearly budget, <i>B</i></td><td class="r">$100k</td><td class="r">$100k</td><td class="r">$100k</td><td class="r">$100k</td><td><span class="no">assumption</span>, cf. <a class="xr" href="#r13">[13]</a></td></tr>
+            <tr><td>Working days, <i>D</i></td><td class="r">250</td><td class="r">250</td><td class="r">250</td><td class="r">250</td><td>52 × 5 − holidays</td></tr>
+            <tr><td>Hit rate, <i>p</i></td><td class="r">2%</td><td class="r">2%</td><td class="r">2%</td><td class="r">2%</td><td class="no">assumption</td></tr>
+            <tr class="mid"><td>Ideas per year, (4), <i>N</i></td><td class="r">300</td><td class="r">166</td><td class="r">27</td><td class="r">26</td><td></td></tr>
           </tbody>
         </table>
       </div>
+      <p>Three inputs have no good public anchor. Parallel tracks <i>k</i> is the team's own bandwidth, and <i>N</i> scales with it whenever time is the limit. The budget <i>B</i> is set near the low end of one published range: $5,000–40,000 for a prototyping stage of 4–12 weeks <a class="xr" href="#r13">[13]</a>, which is roughly $20,000–500,000 a year. The hit rate <i>p</i> is the weakest. The best-measured related figure is that a quarter of new consumer packaged goods are gone within a year and about 40% within two <a class="xr" href="#r14">[14]</a>. That measures the survival of launched products, not the share of tested ideas that users want, so <i>p</i> stays an assumption. Figure 4 lets you vary all three.</p>
+      <p>Faster domestic options exist abroad too. US quick-turn houses advertise turnkey prototypes in 3–10 days <a class="xr" href="#r10">[10]</a>, <a class="xr" href="#r11">[11]</a>, which would close part of the shipping gap at a higher price per board.</p>
       <div class="tbl" id="tab4">
         <p class="cap"><span class="fl">Table 4.</span> Round-trip times τₖ in Figure 2.</p>
         <table class="bt">
@@ -617,13 +644,14 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
           </tbody>
         </table>
       </div>
-      <p>Block times and costs for Figure 3 are shown in the figure. Figure 5 multiplies remaining uncertainty by 0.75 (technical) and 0.85 (production) per build–test iteration, and by 0.80 (demand) per user trial. Figure 6 uses <a class="xr" href="#eq7">(7)</a>.</p>
+      <p>The times in Table 4 are estimates that agree with the published figures: next-day boards and 2–3-day assembly in Shenzhen <a class="xr" href="#r7">[7]</a>, <a class="xr" href="#r8">[8]</a>, 3–5-day courier legs from abroad <a class="xr" href="#r9">[9]</a>, and 3–10-day quick-turn assembly abroad <a class="xr" href="#r10">[10]</a>, <a class="xr" href="#r11">[11]</a>. The message and visit counts in Table 1 are assumptions. In Figure 3, the mould row follows <a class="xr" href="#r12">[12]</a>; the other blocks' times and costs are assumptions. Figure 5 multiplies remaining uncertainty by 0.75 (technical) and 0.85 (production) per build–test iteration, and by 0.80 (demand) per user trial. These rates, and <i>ρ</i> in <a class="xr" href="#eq7">(7)</a> for Figure 6, are assumptions chosen to show a shape, not measured.</p>
     </article>
 
     <div class="end" id="end">
       <section id="log">
         <h3>version history</h3>
         <div class="log">
+          <span class="num">v3</span><span class="num">2026.11.06</span><span>Rebuilt Table 3 from published prices and lead times, with each source cited and every remaining assumption marked. The presets now compare reuse with a new mould, in Shenzhen and abroad. The result: about 300 vs 166 vs 26 ideas a year, where v2 had 360 vs 20 from made-up inputs. Prop. 2 and the title ("500" → "hundreds") changed to match.</span>
           <span class="num">v2</span><span class="num">2026.11.06</span><span>Rewritten as a paper: definitions, propositions, numbered equations evaluated live in each figure, a hit-probability plot, an uncertainty figure and an appendix of parameters.</span>
           <span class="num">v1</span><span class="num">2026.11.06</span><span>First version, built from a one-page diagram of the cluster model.</span>
         </div>
@@ -647,12 +675,12 @@ pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;bord
         <h3>cite this essay</h3>
 <pre class="cite">@misc{li2026shenzhen,
   author = {Jimmy Li},
-  title  = {Why a Shenzhen Team Can Test 500 Ideas a Year},
-  year   = {2026}, note = {v2},
+  title  = {Why a Shenzhen Team Can Test Hundreds of Ideas a Year},
+  year   = {2026}, note = {v3},
   url    = {https://0xff-96.github.io/AgentBlog/posts/shenzhen-hardware.html}
 }</pre>
       </section>
-      <p class="rose"><b>Licence.</b> CC BY 4.0. Figures are illustrative models, not data. Huang's views are paraphrased; read the book for the real thing.</p>
+      <p class="rose"><b>Licence.</b> CC BY 4.0. The figures are simple models. Their inputs cite published sources where those exist and are marked as assumptions where they don't (Appendix A). Huang's views are paraphrased; read the book for the real thing.</p>
     </div>
   </main>
   <div></div>
@@ -768,7 +796,7 @@ const BLOCKS=[
   {nm:'Wireless',sub:'Wi-Fi / BLE',sc:['RF design + certification',6,15000],gk:['certified module',.5,300]},
   {nm:'Battery & charging',sub:'pack, charger IC',sc:['custom pack + circuit',2,2000],gk:['stock pack + ref circuit',.5,200]},
   {nm:'Microphone',sub:'MEMS mic',sc:['custom spec + MOQ',4,3000],gk:['off the market shelf',0,50]},
-  {nm:'Enclosure',sub:'plastic housing',sc:['custom steel mould',6,12000],gk:['public mould 公模',.5,500]},
+  {nm:'Enclosure',sub:'plastic housing',sc:['aluminium prototype mould',3,3500],gk:['public mould 公模',.5,500]},
   {nm:'Firmware',sub:'drivers, app',sc:['written from zero',8,20000],gk:['vendor SDK + tweaks',2,3000]},
 ];
 const PILOT=750;let g3=BLOCKS.map(()=>'gk');const blocksEl=$('#blocks');
@@ -781,7 +809,9 @@ function draw3(){
 blocksEl.addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(!b)return;g3[+b.dataset.i]=b.dataset.v;draw3()});
 
 /* ---------- Figure 4: ideas per year ---------- */
-const PRE={sz:{cost:400,days:5,tracks:6,budget:150,hit:2},rm:{cost:6000,days:30,tracks:2,budget:150,hit:2},corp:{cost:20000,days:60,tracks:4,budget:500,hit:2}};
+// presets = Table 3 (published prices and lead times; k, B, p are assumptions)
+const PRE={sz:{cost:212,days:5,tracks:6,budget:100,hit:2},rm:{cost:262,days:9,tracks:6,budget:100,hit:2},szm:{cost:3662,days:18,tracks:6,budget:100,hit:2},rmm:{cost:3712,days:22,tracks:6,budget:100,hit:2}};
+const WD=250; // working days per year, D
 const costFromV=v=>Math.round(100*Math.pow(200,v/100)/50)*50||100, vFromCost=c=>Math.round(Math.log(c/100)/Math.log(200)*100);
 const dotsEl=$('#dots');dotsEl.innerHTML='<i></i>'.repeat(500);const dots=[...dotsEl.children];
 const rnd=i=>{const x=Math.sin(i*12.9898+78.233)*43758.5453;return x-Math.floor(x)};
@@ -796,7 +826,7 @@ function curve(p,n){
   for(const v of [0,.5,1])s+=`<line class="gr" x1="${CL}" x2="${CW-CR}" y1="${cy(v)}" y2="${cy(v)}"/><text x="${CL-6}" y="${cy(v)+3}" text-anchor="end">${v}</text>`;
   for(const m of [1,10,100,1000])s+=`<line class="ax" x1="${cx(m)}" x2="${cx(m)}" y1="${cy(0)}" y2="${cy(0)+4}"/><text x="${cx(m)}" y="${cy(0)+15}" text-anchor="middle">${m}</text>`;
   s+=`<line class="ax" x1="${CL}" x2="${CW-CR}" y1="${cy(0)}" y2="${cy(0)}"/><line class="ax" x1="${CL}" x2="${CL}" y1="${CT}" y2="${cy(0)}"/>`;
-  for(const [m,l] of [[20,'remote'],[360,'Shenzhen']])s+=`<line class="rf" x1="${cx(m)}" x2="${cx(m)}" y1="${CT}" y2="${cy(0)}"/><text class="tl" x="${cx(m)+3}" y="${CT+8}">${l}</text>`;
+  for(const [m,l,dy] of [[26,'new mould',6],[166,'abroad',20],[300,'Shenzhen',6]])s+=`<line class="rf" x1="${cx(m)}" x2="${cx(m)}" y1="${CT}" y2="${cy(0)}"/><text class="tl" x="${cx(m)+3}" y="${cy(0)-dy}">${l}</text>`;
   s+=`<path class="cv" d="${d}"/>`;
   if(n>=1)s+=`<circle class="mk" r="5" cx="${cx(Math.min(n,1000))}" cy="${cy(1-Math.pow(1-p,n))}"/>`;
   s+=`<text class="tl" x="${(CL+CW-CR)/2}" y="${CH-4}" text-anchor="middle">ideas tested, N (log scale)</text><text class="tl" transform="translate(11 ${(CT+cy(0))/2}) rotate(-90)" text-anchor="middle">P(H ≥ 1)</text>`;
@@ -805,14 +835,14 @@ function curve(p,n){
 function draw4(){
   const cost=costExact??costFromV(+inp.cost.value),days=+inp.days.value,tracks=+inp.tracks.value,budget=+inp.budget.value*1000,hit=+inp.hit.value/100;
   $('#costO').textContent='$'+cost.toLocaleString();$('#daysO').textContent=days+' d';$('#tracksO').textContent=tracks;$('#budgetO').textContent='$'+(budget/1000)+'k';$('#hitO').textContent=Math.round(hit*100)+'%';
-  const byMoney=Math.floor(budget/cost),byTime=Math.floor(tracks*300/days),n=Math.min(byMoney,byTime),P=1-Math.pow(1-hit,n);
+  const byMoney=Math.floor(budget/cost),byTime=Math.floor(tracks*WD/days),n=Math.min(byMoney,byTime),P=1-Math.pow(1-hit,n);
   dots.forEach((d,i)=>{d.className=i<n?(rnd(i)<hit?'hit':'on'):''});
   $('#n4').textContent=n>500?n+' (500 shown)':n;$('#h4').textContent=(n*hit).toFixed(1);
-  const pct=P>.999&&P<1?'>99.9':String(Math.round(P*100));$('#p4').textContent=pct+'%';
-  tex($('#eq4l'),`\\begin{aligned}N&=\\min\\left(\\left\\lfloor\\tfrac{${K(budget)}}{${K(cost)}}\\right\\rfloor,\\ \\left\\lfloor\\tfrac{${tracks}\\cdot 300}{${days}}\\right\\rfloor\\right)=\\min(${byMoney},\\,${byTime})=${n}\\\\P(H\\ge 1)&=1-(1-${hit})^{${n}}${pct[0]==='>'?'>99.9':'='+pct}\\%\\end{aligned}`,
-      `N = min(⌊${budget}/${cost}⌋, ⌊${tracks}·300/${days}⌋) = min(${byMoney}, ${byTime}) = ${n};  P(H ≥ 1) = 1 − (1 − ${hit})^${n} = ${pct}%`);
+  const pct=P>.999&&P<1?'>99.9':P>.95&&P<1?(P*100).toFixed(1):String(Math.round(P*100));$('#p4').textContent=pct+'%';
+  tex($('#eq4l'),`\\begin{aligned}N&=\\min\\left(\\left\\lfloor\\tfrac{${K(budget)}}{${K(cost)}}\\right\\rfloor,\\ \\left\\lfloor\\tfrac{${tracks}\\cdot ${WD}}{${days}}\\right\\rfloor\\right)=\\min(${byMoney},\\,${byTime})=${n}\\\\P(H\\ge 1)&=1-(1-${hit})^{${n}}${pct[0]==='>'?'>99.9':'='+pct}\\%\\end{aligned}`,
+      `N = min(⌊${budget}/${cost}⌋, ⌊${tracks}·${WD}/${days}⌋) = min(${byMoney}, ${byTime}) = ${n};  P(H ≥ 1) = 1 − (1 − ${hit})^${n} = ${pct}%`);
   $('#why4').innerHTML=byMoney<byTime
-    ?`<b>Money is the limit.</b> Time would allow ${byTime} ideas. Lower the cost per idea, as gongkai does in Figure 3.`
+    ?`<b>Money is the limit.</b> Time would allow ${byTime} ideas. Lower the cost per idea: reuse a housing instead of tooling one, as gongkai does in Figure 3.`
     :`<b>Time is the limit.</b> Money would allow ${byMoney} ideas. Shorten the cycle, as the round trip does in Figure 2.`;
   curve(hit,n);
 }
