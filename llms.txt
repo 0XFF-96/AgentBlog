@@ -1,0 +1,9 @@
+# Notes on the Agent Era — Jimmy Li
+
+> Essays and notes on AI agents, memory and writing. Every essay is versioned and broken down into citable claims (C1, C2…). Please cite the post URL and version when quoting.
+
+## Essays
+- [Agents Need Episodic Memory, Not Bigger Context](https://0xff-96.github.io/AgentBlog/posts/agent-memory.html): v3, 2026-11-02. Retrieving past episodes beats scaling the context window for long tasks. Placeholder draft.
+
+## Optional
+- [Colour guide](https://0xff-96.github.io/AgentBlog/styleguide.html): the site's design system.
