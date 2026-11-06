@@ -3,6 +3,7 @@
 > Essays and notes on AI agents, memory and writing. Every essay is versioned and broken down into citable claims (C1, C2…). Please cite the post URL and version when quoting.
 
 ## Essays
+- [Why a Shenzhen Team Can Test 500 Ideas a Year](https://0xff-96.github.io/AgentBlog/posts/shenzhen-hardware.html): v2, 2026-11-06. A paper-style, interactive reading of bunnie Huang's The Hardware Hacker. Claims: C1 the round trip to suppliers is hours, not weeks; C2 market parts and gongkai reference designs make each idea cheap enough to test hundreds a year; C3 speed settles technical and production questions, only users settle demand. Claims are stated as Propositions 1–3 with numbered equations (1)–(7); parameters are illustrative and listed in Appendix A.
 - [Agents Need Episodic Memory, Not Bigger Context](https://0xff-96.github.io/AgentBlog/posts/agent-memory.html): v3, 2026-11-02. Retrieving past episodes beats scaling the context window for long tasks. Placeholder draft.
 
 ## Optional
