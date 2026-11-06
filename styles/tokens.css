@@ -1,0 +1,49 @@
+/* AgentBlog design tokens — "Diagram" system
+   Tinted panels, coloured hairline borders, indigo connectors, mono chips. */
+:root{
+  /* base */
+  --bg:#ffffff;
+  --ink:#1c1c1e;
+  --mute:#5f6168;          /* italic subtitles, labels */
+  --card:#ffffff;          /* inner cards sit on tinted panels */
+  --chip:#f1f1f3;          /* inline code background */
+  --hair:#c9c9cf;          /* neutral card border / dashed */
+
+  /* connectors */
+  --wire:#2b35a8;          /* indigo arrows, links */
+
+  /* panel families: tint + border */
+  --blue-bg:#e9eff9;   --blue-bd:#5b7cc4;     /* ① primary layer  — Essays   */
+  --green-bg:#ebf4ea;  --green-bd:#6aa36a;    /* ② transport      — Notes    */
+  --amber-bg:#fdf3e2;  --amber-bd:#d29a3a;    /* ③ config         — Me       */
+  --violet-bg:#f2ecf8; --violet-bd:#8c68bd;   /* ④ endpoints      — Ask      */
+  --rose-bg:#fae8e7;   --rose-bd:#d9a29d;     /* caveats / rules             */
+
+  /* type */
+  --serif:"Source Serif 4","Noto Serif JP",Georgia,serif;   /* body + titles: academic */
+  --sans:"Source Sans 3",system-ui,sans-serif;              /* small UI labels only */
+  --mono:"Source Code Pro",ui-monospace,monospace;
+  --fs-xs:12px; --fs-s:13.5px; --fs-m:15px; --fs-l:18px; --fs-xl:22px;
+
+  /* shape & space */
+  --r-panel:8px; --r-card:4px; --bw:1.5px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:40px; --s7:64px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141518; --ink:#e7e7ea; --mute:#9a9ca4; --card:#1c1d21; --chip:#2a2b30; --hair:#3a3b42;
+  --wire:#8c95ff;
+  --blue-bg:#18202e;   --blue-bd:#5b7cc4;
+  --green-bg:#17231a;  --green-bd:#5e9a5e;
+  --amber-bg:#2a2214;  --amber-bd:#c48d32;
+  --violet-bg:#221b2c; --violet-bd:#9a78c9;
+  --rose-bg:#2c1c1c;   --rose-bd:#a8706b;
+}}
+:root[data-theme="dark"]{
+  --bg:#141518; --ink:#e7e7ea; --mute:#9a9ca4; --card:#1c1d21; --chip:#2a2b30; --hair:#3a3b42;
+  --wire:#8c95ff;
+  --blue-bg:#18202e;   --blue-bd:#5b7cc4;
+  --green-bg:#17231a;  --green-bd:#5e9a5e;
+  --amber-bg:#2a2214;  --amber-bd:#c48d32;
+  --violet-bg:#221b2c; --violet-bd:#9a78c9;
+  --rose-bg:#2c1c1c;   --rose-bd:#a8706b;
+}

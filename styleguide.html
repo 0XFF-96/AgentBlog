@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+JP:wght@400;600;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=2">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.7 var(--serif)}
+.jp{font-family:"Noto Serif JP",serif}
+.mono{font:11px var(--mono);color:var(--mute)}
+.wrap{max-width:880px;margin:0 auto;padding:72px 16px 120px}
+
+/* cover */
+.cover{display:grid;grid-template-columns:1fr auto;gap:16px;border-top:4px solid var(--ink);padding-top:14px;margin-bottom:72px}
+.cover h1{font:700 30px/1.2 "Noto Serif JP",serif;letter-spacing:.04em}
+.cover h1 small{display:block;font:italic 400 14px var(--serif);letter-spacing:.02em;color:var(--mute);margin-top:6px}
+.cover .meta{text-align:right}
+.cover .bar{grid-column:1/-1;display:flex;height:8px;margin-top:20px}
+.cover .bar i{flex:1}
+
+/* chapter */
+.ch{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:28px 0 48px;border-top:1px solid var(--ink)}
+.ch-h .no{font:500 40px/1 var(--mono);color:var(--ink)}
+.ch-h .jp{font-weight:700;font-size:15px;margin-top:10px;display:block}
+.ch-h .en{color:var(--mute);font-size:12px}
+.lead{max-width:560px;margin-bottom:20px}
+
+/* swatches */
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.s{border:1px solid var(--hair);border-radius:2px;overflow:hidden;background:var(--card)}
+.s .chip{height:72px;border-bottom:1.5px solid}
+.s .chip.split{display:grid;grid-template-rows:1fr 18px}
+.s dl{padding:8px 10px;display:grid;grid-template-columns:auto 1fr;gap:0 8px}
+.s dt{font-weight:700;font-size:12.5px;grid-column:1/-1}
+.s dd{font:10.5px var(--mono);color:var(--mute)}
+.s .k{grid-column:1/-1;font-size:11.5px;margin-top:4px}
+
+/* rules table */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--hair);vertical-align:top}
+th{font-weight:500;color:var(--mute);border-bottom:1px solid var(--ink);font-size:11.5px}
+td .dot{display:inline-block;width:10px;height:10px;border-radius:2px;border:1.5px solid;margin-right:6px;vertical-align:-1px}
+
+/* examples */
+.ex{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{border:1px solid var(--hair);padding:16px}
+.box .cap{display:flex;justify-content:space-between;margin-bottom:12px}
+.panel{border:1.5px solid;border-radius:8px;padding:12px 14px;text-align:center}
+.panel h4{font-weight:400;font-size:15px}
+.panel .q{font-style:italic;color:var(--mute);font-size:12px;text-align:left;margin:2px 0 8px}
+.panel .card{background:var(--card);border-radius:4px;padding:6px 10px;text-align:left;font-size:12.5px}
+code{font:11.5px var(--mono);background:var(--chip);padding:1px 6px;border-radius:3px}
+.wire{display:flex;align-items:center;gap:8px;justify-content:center;height:40px;color:var(--mute);font-style:italic;font-size:12px}
+.wire svg path{stroke:var(--wire);stroke-width:1.5;fill:none}
+.node{display:inline-block;border:1.5px solid var(--hair);border-radius:6px;padding:8px 14px;font-weight:600;text-align:center;font-size:12.5px;background:var(--card)}
+.node.d{border-style:dashed;background:transparent}
+.lab{display:inline-flex;gap:6px;font-size:12.5px;padding:1px 9px;border-radius:4px;border:1.5px solid}
+.lab i{color:var(--mute)}
+.rose{background:var(--rose-bg);padding:10px 14px;font-size:12.5px}
+.ok,.ng{font:700 11px var(--sans);padding:1px 6px;border-radius:2px;color:#fff}
+.ok{background:var(--green-bd)}.ng{background:#c0453a}
+
+.blue{background:var(--blue-bg);border-color:var(--blue-bd)}
+.green{background:var(--green-bg);border-color:var(--green-bd)}
+.amber{background:var(--amber-bg);border-color:var(--amber-bd)}
+.violet{background:var(--violet-bg);border-color:var(--violet-bd)}
+
+footer{border-top:4px solid var(--ink);padding-top:10px;display:flex;justify-content:space-between}
+@media (max-width:640px){.ch{grid-template-columns:1fr;gap:12px}.ch-h{display:flex;gap:12px;align-items:baseline}.ch-h .jp{margin:0}.ex{grid-template-columns:1fr}.cover{grid-template-columns:1fr}.cover .meta{text-align:left}}
+</style>
+</head>
+<body><div class="wrap">
+
+<header class="cover">
+  <h1>配色ガイド<small>Color Guide · Notes on the Agent Era</small></h1>
+  <div class="meta mono">Ver. 1.0<br>2026.11.06<br>Jimmy Li</div>
+  <div class="bar" aria-hidden="true"><i style="background:var(--blue-bd)"></i><i style="background:var(--green-bd)"></i><i style="background:var(--amber-bd)"></i><i style="background:var(--violet-bd)"></i><i style="background:var(--rose-bd)"></i><i style="background:var(--wire)"></i></div>
+</header>
+
+<!-- 01 -->
+<section class="ch">
+  <div class="ch-h"><div class="no">01</div><span class="jp">基本理念</span><span class="en">Principles</span></div>
+  <div>
+    <p class="lead">The palette comes from architecture diagrams: pale tints that separate layers, coloured hairlines that mark edges, and one indigo wire that shows how things connect. Colour tells you <b>which layer</b> you're in. It is never there for decoration.</p>
+    <table>
+      <tr><th style="width:36px">No.</th><th>Rule</th><th>Detail</th></tr>
+      <tr><td class="mono">1</td><td>One colour per layer</td><td>Each section owns exactly one tint and its matching border.</td></tr>
+      <tr><td class="mono">2</td><td>Tint for areas, border for edges</td><td>Never fill an area with a border colour, except for small markers.</td></tr>
+      <tr><td class="mono">3</td><td>Indigo only connects</td><td>Use it for links, arrows, focus states and the main button. Nothing else.</td></tr>
+      <tr><td class="mono">4</td><td>Grey means code</td><td>Dates, versions and identifiers sit in grey monospace chips.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="ch">
+  <div class="ch-h"><div class="no">02</div><span class="jp">層の色</span><span class="en">Layer colours</span></div>
+  <div>
+    <p class="lead">Each of the four layers has a pair of colours: a tint for the background and a border for edges and labels.</p>
+    <div class="sw">
+      <div class="s"><div class="chip blue"></div><dl><dt>① 青 Blue</dt><dd>tint</dd><dd>#E9EFF9</dd><dd>border</dd><dd>#5B7CC4</dd><dd class="k">Essays · primary layer</dd></dl></div>
+      <div class="s"><div class="chip green"></div><dl><dt>② 緑 Green</dt><dd>tint</dd><dd>#EBF4EA</dd><dd>border</dd><dd>#6AA36A</dd><dd class="k">Notes · in progress</dd></dl></div>
+      <div class="s"><div class="chip amber"></div><dl><dt>③ 黄 Amber</dt><dd>tint</dd><dd>#FDF3E2</dd><dd>border</dd><dd>#D29A3A</dd><dd class="k">Me · identity, settings</dd></dl></div>
+      <div class="s"><div class="chip violet"></div><dl><dt>④ 紫 Violet</dt><dd>tint</dd><dd>#F2ECF8</dd><dd>border</dd><dd>#8C68BD</dd><dd class="k">Ask · endpoints</dd></dl></div>
+      <div class="s"><div class="chip" style="background:var(--rose-bg);border-color:var(--rose-bg)"></div><dl><dt>注 Rose</dt><dd>tint</dd><dd>#FAE8E7</dd><dd>border</dd><dd>none</dd><dd class="k">Rules, caveats</dd></dl></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="ch">
+  <div class="ch-h"><div class="no">03</div><span class="jp">基本色</span><span class="en">Base colours</span></div>
+  <div>
+    <div class="sw">
+      <div class="s"><div class="chip" style="background:var(--wire);border-color:var(--wire)"></div><dl><dt>藍 Wire</dt><dd>hex</dd><dd>#2B35A8</dd><dd class="k">Links, arrows, primary button</dd></dl></div>
+      <div class="s"><div class="chip" style="background:var(--ink);border-color:var(--ink)"></div><dl><dt>墨 Ink</dt><dd>hex</dd><dd>#1C1C1E</dd><dd class="k">Body text, rules</dd></dl></div>
+      <div class="s"><div class="chip" style="background:var(--mute);border-color:var(--mute)"></div><dl><dt>灰 Mute</dt><dd>hex</dd><dd>#5F6168</dd><dd class="k">Italic subtitles, metadata</dd></dl></div>
+      <div class="s"><div class="chip" style="background:var(--chip);border-color:var(--hair)"></div><dl><dt>鼠 Chip</dt><dd>hex</dd><dd>#F1F1F3</dd><dd class="k">Code chips</dd></dl></div>
+      <div class="s"><div class="chip" style="background:var(--hair);border-color:var(--hair)"></div><dl><dt>線 Hair</dt><dd>hex</dd><dd>#C9C9CF</dd><dd class="k">Node borders, dashed lines</dd></dl></div>
+      <div class="s"><div class="chip" style="background:#fff;border-color:var(--hair)"></div><dl><dt>白 Paper</dt><dd>hex</dd><dd>#FFFFFF</dd><dd class="k">Page, inner cards</dd></dl></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="ch">
+  <div class="ch-h"><div class="no">04</div><span class="jp">使用例</span><span class="en">Usage</span></div>
+  <div class="ex">
+    <div class="box">
+      <div class="cap"><span class="jp">A. パネル Panel</span><span class="mono">in posts</span></div>
+      <div class="panel blue"><h4>① Business code</h4><p class="q">Who am I? What shape do I need?</p><div class="card"><code>createChatModel(TASK)</code><br>prompt · tools · output schema</div></div>
+      <div class="wire"><svg width="10" height="36"><path d="M5 0 V30 M1 25 L5 32 L9 25"/></svg>task name</div>
+      <div class="panel green"><h4>② Factory</h4><div class="card"><b>no model names</b>, no dials</div></div>
+    </div>
+    <div class="box">
+      <div class="cap"><span class="jp">B. ラベル Label</span><span class="mono">on index</span></div>
+      <p><span class="lab blue">① Essays <i>what I think</i></span></p>
+      <p style="margin:8px 0"><code>2026.11.02</code> Agents need episodic memory <code>v3</code></p>
+      <p style="margin-top:16px"><span class="lab violet">④ Ask <i>query my writing</i></span></p>
+      <div class="cap jp" style="margin:24px 0 10px">C. ノード Node</div>
+      <span class="node">Substack<br><small style="font-weight:400;color:var(--mute)">full essay</small></span>
+      <span class="node d">MCP<br><small style="font-weight:400;color:var(--mute)">soon</small></span>
+      <div class="cap jp" style="margin:24px 0 10px">D. 注意 Callout</div>
+      <div class="rose"><b>The agent only answers</b> from what I've written.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="ch">
+  <div class="ch-h"><div class="no">05</div><span class="jp">禁止事項</span><span class="en">Do / Don't</span></div>
+  <div>
+    <table>
+      <tr><th style="width:56px"></th><th>Case</th></tr>
+      <tr><td><span class="ok">OK</span></td><td>Use one tint per section, with white cards inside it.</td></tr>
+      <tr><td><span class="ok">OK</span></td><td>Use a dashed border for things that don't exist yet (drafts, upcoming channels).</td></tr>
+      <tr><td><span class="ng">NG</span></td><td>Put two tints next to each other in the same section.</td></tr>
+      <tr><td><span class="ng">NG</span></td><td>Use indigo as a background or a heading colour.</td></tr>
+      <tr><td><span class="ng">NG</span></td><td>Use saturated border colours for body text.</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer class="mono"><span><a href="index.html" style="color:inherit">← Notes on the Agent Era</a></span><span>tokens: styles/tokens.css</span></footer>
+</div></body>
+</html>
