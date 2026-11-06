@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents Need Episodic Memory</title>
+<meta name="description" content="Retrieving past episodes beats scaling the context window for long-horizon agent tasks.">
+<link rel="alternate" type="text/markdown" href="agent-memory.md" title="Markdown source for agents">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+JP:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles/tokens.css?v=3">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16.5px/1.75 var(--serif)}
+a{color:var(--wire);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+code{font:13px var(--mono);background:var(--chip);padding:1px 5px;border-radius:3px}
+.num{font:11.5px var(--mono);color:var(--mute)}
+.bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--wire);z-index:9}
+
+/* layout: toc | body | margin notes */
+.page{display:grid;grid-template-columns:180px minmax(0,640px) 220px;gap:0 40px;justify-content:center;padding:72px 16px 120px}
+.top{grid-column:1/-1;display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:48px}
+.top a{color:inherit}
+
+/* toc */
+.toc{position:sticky;top:40px;align-self:start;font-size:13px}
+.toc b{display:block;font:italic 12px var(--serif);color:var(--mute);border-bottom:1px solid var(--ink);padding-bottom:4px;margin-bottom:6px;font-weight:400}
+.toc a{display:block;color:var(--mute);padding:2px 0 2px 10px;border-left:2px solid transparent}
+.toc a.on{color:var(--ink);border-color:var(--blue-bd)}
+.toc a:hover{text-decoration:none;color:var(--wire)}
+
+/* header */
+.lab{display:inline-flex;gap:8px;align-items:baseline;font-size:13px;padding:2px 10px;border-radius:4px;border:1.5px solid;background:var(--blue-bg);border-color:var(--blue-bd)}
+.lab i{color:var(--mute);font-size:12.5px}
+h1{font-weight:600;font-size:32px;line-height:1.25;letter-spacing:-.01em;margin:16px 0 8px}
+.dek{font-style:italic;color:var(--mute);font-size:18px;line-height:1.5}
+.meta{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:2px 32px;margin:24px 0 32px;padding:10px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);font-size:13px}
+.meta dt{font-style:italic;color:var(--mute);font-size:12px}
+.meta dd{grid-row:2}
+
+/* claims (abstract) */
+.claims{background:var(--blue-bg);border:1.5px solid var(--blue-bd);border-radius:8px;padding:14px 18px 16px;margin-bottom:40px}
+.claims h2{font-weight:400;font-size:15px;text-align:center;margin:0}
+.claims .q{font-style:italic;color:var(--mute);font-size:13px;margin:0 0 10px}
+.claims ol{list-style:none;background:var(--card);border-radius:4px;padding:6px 12px}
+.claims li{display:grid;grid-template-columns:34px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid var(--chip);font-size:15px;line-height:1.55}
+.claims li:last-child{border:0}
+
+/* prose */
+article h2{font-weight:600;font-size:21px;margin:48px 0 12px;scroll-margin-top:24px}
+article h2 .sec{font:13px var(--mono);color:var(--mute);margin-right:10px;font-weight:400}
+article p{margin:0 0 18px;hyphens:auto}
+article p:first-of-type::first-letter{float:left;font-size:54px;line-height:.9;padding:6px 8px 0 0;font-weight:600}
+mark.c{background:none;border-bottom:1.5px solid var(--blue-bd);color:inherit;padding-bottom:1px}
+mark.c sup{font:10px var(--mono);color:var(--blue-bd);margin-left:2px}
+blockquote{border-left:2px solid var(--ink);padding:2px 0 2px 18px;margin:24px 0;font-style:italic;font-size:18px;line-height:1.55}
+blockquote cite{display:block;font-size:13px;color:var(--mute);margin-top:6px}
+sup.fn a{font:10.5px var(--mono)}
+
+/* margin notes */
+.sn{float:right;clear:right;width:220px;margin-right:-260px;margin-top:4px;font-size:12.5px;line-height:1.5;color:var(--mute);position:relative}
+.sn b{font:10.5px var(--mono);color:var(--ink);margin-right:4px}
+
+/* figure: diagram panels */
+figure{margin:32px 0}
+.fig{border:1px solid var(--hair);padding:18px;display:grid;gap:0;justify-items:stretch}
+.pn{border:1.5px solid;border-radius:8px;padding:8px 14px;text-align:center;font-size:14px}
+.pn small{display:block;font-style:italic;color:var(--mute);font-size:12px}
+.pn.b{background:var(--blue-bg);border-color:var(--blue-bd)}
+.pn.g{background:var(--green-bg);border-color:var(--green-bd)}
+.pn.v{background:var(--violet-bg);border-color:var(--violet-bd)}
+.wire{display:flex;justify-content:center;align-items:center;gap:8px;height:34px;font-style:italic;font-size:12px;color:var(--mute)}
+.wire svg path{stroke:var(--wire);stroke-width:1.5;fill:none}
+figcaption{font-size:13px;color:var(--mute);margin-top:8px}
+figcaption b{color:var(--ink);font-weight:600}
+
+/* end matter */
+.end{margin-top:56px;display:grid;gap:28px}
+.end h3{font-weight:400;font-size:12px;font-style:italic;color:var(--mute);border-bottom:1px solid var(--ink);padding-bottom:4px;margin-bottom:8px}
+.log{display:grid;grid-template-columns:40px 92px 1fr;gap:4px 12px;font-size:14px}
+.nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.node{border:1.5px solid var(--hair);border-radius:6px;padding:8px 6px;text-align:center;font-size:13.5px;font-weight:600;color:var(--ink);background:var(--card)}
+.node small{display:block;font-weight:400;font-style:italic;color:var(--mute);font-size:12px}
+.node.d{border-style:dashed;background:transparent}
+.node:hover{border-color:var(--wire);text-decoration:none}
+.ask{background:var(--violet-bg);border:1.5px solid var(--violet-bd);border-radius:8px;padding:12px 16px}
+.ask form{display:flex;gap:8px;background:var(--card);border-radius:4px;padding:5px 5px 5px 12px;margin-top:6px}
+.ask input{flex:1;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.ask button{border:0;background:var(--wire);color:#fff;font:13px var(--serif);border-radius:3px;padding:2px 12px;cursor:pointer}
+.ask p{font-size:13.5px;font-style:italic;color:var(--mute)}
+#out p{font-style:normal;color:var(--ink);margin-top:8px;border-left:2px solid var(--violet-bd);padding-left:10px}
+.refs{padding-left:24px;font-size:14px}
+.refs li{margin-bottom:4px}
+pre.cite{font:12px/1.6 var(--mono);background:var(--chip);padding:10px 12px;border-radius:4px;overflow-x:auto;white-space:pre}
+.rose{background:var(--rose-bg);padding:10px 14px;font-size:13.5px}
+
+@media (max-width:1180px){
+  .page{grid-template-columns:minmax(0,680px);}
+  .toc{display:none}
+  .sn{float:none;display:block;width:auto;margin:0 0 18px;padding-left:12px;border-left:1px solid var(--hair)}
+}
+@media (max-width:560px){
+  body{font-size:16px}h1{font-size:26px}.page{padding-top:40px}
+  .meta{grid-template-columns:repeat(2,auto)}.meta dd{grid-row:auto}
+  .nodes{grid-template-columns:repeat(2,1fr)}.log{grid-template-columns:36px 1fr}.log .num:nth-child(3n+2){display:none}
+}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="page">
+
+  <nav class="top"><a href="../index.html">← Notes on the Agent Era</a><span><a href="agent-memory.md">.md source</a> · <a href="#cite">cite</a></span></nav>
+
+  <aside class="toc">
+    <b>contents</b>
+    <a href="#claims">Core claims</a>
+    <a href="#s1">§1 The context trap</a>
+    <a href="#s2">§2 Episodes, not tokens</a>
+    <a href="#s3">§3 A minimal design</a>
+    <a href="#end">Versions &amp; cite</a>
+  </aside>
+
+  <main>
+    <header>
+      <span class="lab">① Essay <i>memory · architecture</i></span>
+      <h1>Agents Need Episodic Memory, Not Bigger Context</h1>
+      <p class="dek">For long tasks, an agent that can recall what happened beats one that can see more tokens.</p>
+      <dl class="meta">
+        <dt>published</dt><dd class="num">2026.11.02</dd>
+        <dt>version</dt><dd class="num">v3 · <a href="#log">2 revisions</a></dd>
+        <dt>reading</dt><dd class="num">12 min</dd>
+        <dt>author</dt><dd>Jimmy Li</dd>
+      </dl>
+    </header>
+
+    <section class="claims" id="claims">
+      <h2>Core claims</h2>
+      <p class="q">What should you remember, and what will an agent cite?</p>
+      <ol>
+        <li><code>C1</code><span>A bigger context window delays forgetting; it doesn't fix it.</span></li>
+        <li><code>C2</code><span>Storing past runs as structured episodes beats replaying raw tokens.</span></li>
+        <li><code>C3</code><span>Memory should be written by the agent but owned by the user.</span></li>
+      </ol>
+    </section>
+
+    <article>
+      <h2 id="s1"><span class="sec">§1</span>The context trap</h2>
+      <p>Each time a model ships with a longer context window, the same idea comes back: if the agent can see everything, it doesn't need memory. <mark class="c">That treats forgetting as a capacity problem when it's really a retrieval problem<sup>C1</sup></mark>. Even with a million tokens, an agent still has to decide which forty of them matter right now.</p>
+      <span class="sn"><b>1</b>Usable context is usually much smaller than the advertised window. Attention spreads thin long before the limit.</span>
+      <p>In practice, long contexts fail quietly. The agent doesn't crash. It just gives a little less weight to the instruction you gave it three hours ago, and the drift builds up.<sup class="fn"><a href="#r1">[1]</a></sup></p>
+
+      <blockquote>A context window is a desk. Memory is a filing cabinet. You can't fix a messy office by buying a bigger desk.<cite>— notes, 2026.10</cite></blockquote>
+
+      <h2 id="s2"><span class="sec">§2</span>Episodes, not tokens</h2>
+      <p>People don't remember transcripts. We remember <em>episodes</em>: what we tried, what happened, and what we would do differently next time. <mark class="c">An agent that stores each run as a small structured record (goal, actions, outcome, lesson) can recall exactly the right past experience<sup>C2</sup></mark>, at a tiny fraction of the cost of replaying the whole transcript.</p>
+      <span class="sn"><b>2</b>An episode here is about 200 tokens of JSON, compared with roughly 40k tokens for the raw transcript.</span>
+
+      <figure>
+        <div class="fig">
+          <div class="pn b">① Run<small>goal · tool calls · result</small></div>
+          <div class="wire"><svg width="10" height="30"><path d="M5 0 V24 M1 19 L5 26 L9 19"/></svg>distill</div>
+          <div class="pn g">② Episode store<small>goal · outcome · lesson · embedding</small></div>
+          <div class="wire"><svg width="10" height="30"><path d="M5 0 V24 M1 19 L5 26 L9 19"/></svg>retrieve top-k</div>
+          <div class="pn v">③ Next run<small>prompt + 3 relevant episodes</small></div>
+        </div>
+        <figcaption><b>Fig. 1</b> Each run is distilled into an episode. The next run retrieves only what's relevant.</figcaption>
+      </figure>
+
+      <h2 id="s3"><span class="sec">§3</span>A minimal design</h2>
+      <p>You don't need a new framework. A table of episodes, an embedding column and one retrieval call at the start of each run cover most of the benefit. <mark class="c">Keep the store in a place the user can read, edit and delete<sup>C3</sup></mark>. An agent's memory is a record of the user's work, so it should belong to the user.</p>
+      <p>Write episodes with <code>remember(goal, outcome, lesson)</code> and read them with <code>recall(goal, k=3)</code>. Everything else is tuning.</p>
+    </article>
+
+    <div class="end" id="end">
+      <section id="log">
+        <h3>version history</h3>
+        <div class="log">
+          <span class="num">v3</span><span class="num">2026.11.02</span><span>Added §3 and Fig. 1 after building a prototype.</span>
+          <span class="num">v2</span><span class="num">2026.10.18</span><span>Softened C1: long context <em>helps</em>, it just isn't enough.</span>
+          <span class="num">v1</span><span class="num">2026.10.01</span><span>First draft.</span>
+        </div>
+      </section>
+
+      <section>
+        <h3>read it elsewhere</h3>
+        <div class="nodes">
+          <a class="node" href="#">Substack<small>full essay</small></a>
+          <a class="node" href="#">LinkedIn<small>work lesson</small></a>
+          <a class="node" href="#">X<small>6-post thread</small></a>
+          <a class="node d" href="#">小红书<small>not yet</small></a>
+        </div>
+      </section>
+
+      <section class="ask">
+        <h3 style="border-color:var(--violet-bd)">ask this essay</h3>
+        <p>Answers use only this essay and cite the claim (C1–C3).</p>
+        <form id="f"><input id="q" placeholder="e.g. How is an episode different from a summary?" aria-label="Ask about this essay"><button>Ask</button></form>
+        <div id="out"></div>
+      </section>
+
+      <section>
+        <h3>references</h3>
+        <ol class="refs">
+          <li id="r1">Placeholder reference on long-context degradation, 2025.</li>
+          <li>Placeholder reference on episodic memory in cognitive science.</li>
+        </ol>
+      </section>
+
+      <section id="cite">
+        <h3>cite this essay</h3>
+<pre class="cite">@misc{li2026episodic,
+  author = {Jimmy Li},
+  title  = {Agents Need Episodic Memory, Not Bigger Context},
+  year   = {2026}, note = {v3},
+  url    = {https://example.com/posts/agent-memory}
+}</pre>
+      </section>
+
+      <p class="rose"><b>Licence.</b> CC BY 4.0. Agents may quote these claims, with a citation, through <code>/llms.txt</code> or MCP.</p>
+    </div>
+  </main>
+
+  <div></div>
+</div>
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%'},{passive:true});
+const links=[...document.querySelectorAll('.toc a')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('#claims,article h2,#end').forEach(s=>so.observe(s));
+// demo only: replace with the MCP/API backend
+const out=document.getElementById('out'),q=document.getElementById('q');
+document.getElementById('f').onsubmit=e=>{e.preventDefault();if(!q.value.trim())return;const p=document.createElement('p');p.textContent='Demo reply. Once connected, the answer will quote this essay and cite C1–C3.';out.appendChild(p);q.value=''};
+</script>
+</body>
+</html>
