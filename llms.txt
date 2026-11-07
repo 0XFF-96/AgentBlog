@@ -8,3 +8,7 @@
 
 ## Optional
 - [Colour guide](https://0xff-96.github.io/AgentBlog/styleguide.html): the site's design system.
+
+## Author
+- [Jimmy Li on LinkedIn](https://www.linkedin.com/in/jimmyli96/): professional profile.
+- [GitHub](https://github.com/0XFF-96): source of this site.
