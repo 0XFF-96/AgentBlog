@@ -70,6 +70,29 @@ footer{margin-top:72px;display:flex;justify-content:space-between;gap:8px;flex-w
 @media (max-width:640px){.wrap{padding:64px 16px 96px}.kv{grid-template-columns:1fr}
   .tbl.e{grid-template-columns:84px minmax(0,1fr) 32px}.tbl.n{grid-template-columns:84px minmax(0,1fr) 52px}
   .tbl .h,.tbl .hide{display:none}}
+
+/* featured LinkedIn gallery */
+.fh{display:flex;justify-content:space-between;align-items:baseline;margin:28px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--ink)}
+.fh i{font-size:12px;color:var(--mute)}
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.card{display:flex;flex-direction:column;gap:4px;background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:10px 12px;color:var(--ink);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--wire);color:var(--ink);transform:translateY(-2px)}
+.card .k{display:flex;justify-content:space-between;align-items:center}
+.kind{font:11px var(--sans);padding:0 7px;border-radius:3px;border:1px solid}
+.kind.talk{background:var(--blue-bg);border-color:var(--blue-bd)}
+.kind.com{background:var(--green-bg);border-color:var(--green-bd)}
+.kind.rep{background:var(--amber-bg);border-color:var(--amber-bd)}
+.kind.cert{background:var(--violet-bg);border-color:var(--violet-bd)}
+.card b{font-weight:600;font-size:14.5px;line-height:1.35}
+.card p{font-size:12.5px;line-height:1.45;color:var(--mute);font-style:italic;flex:1}
+.card .f{display:flex;justify-content:space-between}
+.card .f .go{color:var(--wire)}
+.card.top{grid-column:span 2}
+.card.more{display:none}
+.gal.all .card.more{display:flex}
+.tog{margin-top:8px;background:none;border:0;font:italic 13px var(--serif);color:var(--wire);cursor:pointer;padding:0}
+@media (max-width:640px){.gal{grid-template-columns:1fr 1fr}.card.top{grid-column:1/-1}}
+@media (max-width:420px){.gal{grid-template-columns:1fr}}
 </style>
 </head>
 <body><div class="wrap">
@@ -103,6 +126,20 @@ footer{margin-top:72px;display:flex;justify-content:space-between;gap:8px;flex-w
   <div class="lab amber">③ Me <i>who is thinking</i></div>
   <p>I build agent systems at PictureWealth and write about how AI changes the way we work.</p>
   <dl class="kv"><dt>now</dt><dd>Agent memory · LLM gateways</dd><dt>profile</dt><dd><a href="https://www.linkedin.com/in/jimmyli96/" rel="me noopener" target="_blank">LinkedIn ↗</a> <span class="num">in/jimmyli96</span> · <a href="https://github.com/0XFF-96" rel="me noopener" target="_blank">GitHub ↗</a></dd><dt>soon</dt><dd style="color:var(--mute)">Substack · X · 小红书</dd></dl>
+  <div class="fh"><span>featured on LinkedIn</span><i>talks · community · reports</i></div>
+  <div class="gal" id="gal">
+    <a class="card top" href="https://www.linkedin.com/feed/update/urn:li:activity:7512320687684972544/" target="_blank" rel="noopener"><span class="k"><span class="kind talk">Talk</span><span class="num">2026.10.04</span></span><b>DDD Perth: putting it into practice</b><p>Define “done”, break it down, give the agent context, keep a human in the loop, all to order dinner for 20.</p><span class="f num"><span>♥ 101</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7494651574732906497/" target="_blank" rel="noopener"><span class="k"><span class="kind com">Community</span><span class="num">2026.08.16</span></span><b>60+ attendees, 6 speakers, 4 hours</b><p>A meetup at UWA Industry Hub with people who have worked across Australia, China, Taiwan, the US, the UK and Germany.</p><span class="f num"><span>♥ 84</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7514873171167096832/" target="_blank" rel="noopener"><span class="k"><span class="kind com">Community</span><span class="num">2026.10.11</span></span><b>WA Chinese IT Professionals Meetup #4</b><p>A people-skills workshop, and the story of building an app from idea to launch.</p><span class="f num"><span>♥ 70</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7495461268250669056/" target="_blank" rel="noopener"><span class="k"><span class="kind cert">Certified</span><span class="num">2026.08.18</span></span><b>Claude Certified Architect – Professional</b><p>I took Anthropic’s CCAR-P certification as soon as it was announced.</p><span class="f num"><span>♥ 63</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7503588154566856704/" target="_blank" rel="noopener"><span class="k"><span class="kind rep">Report</span><span class="num">2026.09.09</span></span><b>What does the Perth tech ecosystem look like?</b><p>10 years, 291 agenda items and 238 speakers from DDD Perth, analysed with help from AI.</p><span class="f num"><span>♥ 61</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7517058656639655937/" target="_blank" rel="noopener"><span class="k"><span class="kind talk">Event</span><span class="num">2026.10.17</span></span><b>GOSIM Shenzhen: Omarchy, an agent OS</b><p>DHH on Omarchy, plus a conversation with OpenCV’s CEO about the future of agent software.</p><span class="f num"><span>♥ 50</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7511553190446686208/" target="_blank" rel="noopener"><span class="k"><span class="kind talk">Event</span><span class="num">2026.10.01</span></span><b>Taking a Perth crew to GOSIM 2026</b><p>My must-see list for Shenzhen: robotics, AI glasses, vLLM and harness engineering.</p><span class="f num"><span>♥ 29</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card more" href="https://www.linkedin.com/feed/update/urn:li:activity:7473155019681316865/" target="_blank" rel="noopener"><span class="k"><span class="kind com">Community</span><span class="num">2026.06.17</span></span><b>Perth Build Club turns one</b><p>Our “silly pitch”: personal AI agents that talk on your behalf, built on agent-to-agent (A2A) infrastructure.</p><span class="f num"><span>♥ 60</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card more" href="https://www.linkedin.com/feed/update/urn:li:activity:7471858050761646080/" target="_blank" rel="noopener"><span class="k"><span class="kind com">Community</span><span class="num">2026.06.14</span></span><b>WA IT Chinese Community Meetup</b><p>Career growth in software engineering, and an afternoon of good discussion.</p><span class="f num"><span>♥ 60</span><span class="go">LinkedIn ↗</span></span></a>
+    <a class="card more" href="https://www.linkedin.com/feed/update/urn:li:activity:7461924770725597185/" target="_blank" rel="noopener"><span class="k"><span class="kind talk">Mentoring</span><span class="num">2026.05.17</span></span><b>Lessons from a Principal Engineer</b><p>What I learned from catching up with a principal engineer at Atlassian.</p><span class="f num"><span>♥ 43</span><span class="go">LinkedIn ↗</span></span></a>
+  </div>
+  <button class="tog" id="tog" aria-expanded="false">Show all 10 →</button>
 </section>
 
 <section class="r">
@@ -118,6 +155,8 @@ footer{margin-top:72px;display:flex;justify-content:space-between;gap:8px;flex-w
 <footer class="r"><span>© 2026 Jimmy Li · CC BY 4.0</span><span><a href="styleguide.html">配色ガイド</a> · <a href="llms.txt">llms.txt</a></span></footer>
 </div>
 <script>
+const gal=document.getElementById('gal'),tog=document.getElementById('tog');
+tog.onclick=()=>{const all=gal.classList.toggle('all');tog.textContent=all?'Show fewer ←':'Show all 10 →';tog.setAttribute('aria-expanded',all)};
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.r').forEach((el,i)=>{el.style.transitionDelay=Math.min(i,4)*70+'ms';io.observe(el)});
 // demo only: replace with the MCP/API backend

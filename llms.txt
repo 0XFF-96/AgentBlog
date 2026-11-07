@@ -12,3 +12,10 @@
 ## Author
 - [Jimmy Li on LinkedIn](https://www.linkedin.com/in/jimmyli96/): professional profile.
 - [GitHub](https://github.com/0XFF-96): source of this site.
+
+## Featured on LinkedIn
+- [DDD Perth: putting it into practice](https://www.linkedin.com/feed/update/urn:li:activity:7512320687684972544/): 2026-10-04. Using an AI agent to plan a dinner for 20: define done, break it down, give context, keep a human in the loop.
+- [What does the Perth tech ecosystem look like?](https://www.linkedin.com/feed/update/urn:li:activity:7503588154566856704/): 2026-09-09. Ten years of DDD Perth agenda data (291 sessions, 238 speakers).
+- [Claude Certified Architect – Professional](https://www.linkedin.com/feed/update/urn:li:activity:7495461268250669056/): 2026-08-18.
+- [GOSIM Shenzhen 2026](https://www.linkedin.com/feed/update/urn:li:activity:7511553190446686208/): 2026-10-01. Agentic AI, robotics and edge devices.
+- [Perth Build Club turns one](https://www.linkedin.com/feed/update/urn:li:activity:7473155019681316865/): 2026-06-17. Personal agents talking on your behalf, over A2A.
