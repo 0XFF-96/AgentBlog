@@ -1,0 +1,10 @@
+/* Site nav shared by article pages and the colour guide.
+   Matches the nav on index.html and gallery.html. */
+.sitenav{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font:13.5px/1.6 var(--serif);color:var(--ink)}
+.sitenav>a{font-weight:600;font-size:15px;color:var(--ink);text-decoration:none}
+.sitenav div{display:flex;gap:18px}
+.sitenav div a{color:var(--mute);text-decoration:none;transition:color .2s}
+.sitenav a:hover{color:var(--wire);text-decoration:none}
+.sitenav div a.on{color:var(--ink);border-bottom:1.5px solid var(--wire)}
+.sitenav.top{color:var(--ink);font-size:13.5px}
+.sitenav.top>a{color:var(--ink)}
