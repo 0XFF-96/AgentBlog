@@ -7,6 +7,7 @@
 - [Agents Need Episodic Memory, Not Bigger Context](https://0xff-96.github.io/AgentBlog/posts/agent-memory.html): v3, 2026-11-02. Retrieving past episodes beats scaling the context window for long tasks. Placeholder draft.
 
 ## Optional
+- [Gallery](https://0xff-96.github.io/AgentBlog/gallery.html): featured LinkedIn posts with photos.
 - [Colour guide](https://0xff-96.github.io/AgentBlog/styleguide.html): the site's design system.
 
 ## Author

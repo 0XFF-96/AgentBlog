@@ -19,6 +19,11 @@ a:hover{color:var(--wire)}
 header{margin-bottom:64px}
 header h1{font-weight:600;font-size:17px}
 header p{color:var(--mute);font-style:italic;margin-top:4px}
+.hn{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.hn nav{display:flex;gap:18px;font-size:13.5px}
+.hn nav a{color:var(--mute)}
+.hn nav a:hover{color:var(--wire)}
+.hn nav a.on{color:var(--ink);border-bottom:1.5px solid var(--wire)}
 
 section{margin-bottom:56px}
 .lab{display:inline-flex;gap:8px;align-items:baseline;font-size:13px;padding:2px 10px;border-radius:4px;border:1.5px solid;margin-bottom:10px}
@@ -98,7 +103,7 @@ footer{margin-top:72px;display:flex;justify-content:space-between;gap:8px;flex-w
 <body><div class="wrap">
 
 <header class="r">
-  <h1>Notes on the Agent Era · Jimmy Li</h1>
+  <div class="hn"><h1>Notes on the Agent Era · Jimmy Li</h1><nav><a class="on" href="index.html">Home</a><a href="gallery.html">Gallery</a><a href="styleguide.html">配色ガイド</a></nav></div>
   <p>Essays are the source. Channels and agents read from them.</p>
 </header>
 
@@ -126,7 +131,7 @@ footer{margin-top:72px;display:flex;justify-content:space-between;gap:8px;flex-w
   <div class="lab amber">③ Me <i>who is thinking</i></div>
   <p>I build agent systems at PictureWealth and write about how AI changes the way we work.</p>
   <dl class="kv"><dt>now</dt><dd>Agent memory · LLM gateways</dd><dt>profile</dt><dd><a href="https://www.linkedin.com/in/jimmyli96/" rel="me noopener" target="_blank">LinkedIn ↗</a> <span class="num">in/jimmyli96</span> · <a href="https://github.com/0XFF-96" rel="me noopener" target="_blank">GitHub ↗</a></dd><dt>soon</dt><dd style="color:var(--mute)">Substack · X · 小红书</dd></dl>
-  <div class="fh"><span>featured on LinkedIn</span><i>talks · community · reports</i></div>
+  <div class="fh"><span>featured on LinkedIn</span><a href="gallery.html" style="font-size:12.5px;font-style:italic;color:var(--wire)">with photos → Gallery</a></div>
   <div class="gal" id="gal">
     <a class="card top" href="https://www.linkedin.com/feed/update/urn:li:activity:7512320687684972544/" target="_blank" rel="noopener"><span class="k"><span class="kind talk">Talk</span><span class="num">2026.10.04</span></span><b>DDD Perth: putting it into practice</b><p>Define “done”, break it down, give the agent context, keep a human in the loop, all to order dinner for 20.</p><span class="f num"><span>♥ 101</span><span class="go">LinkedIn ↗</span></span></a>
     <a class="card" href="https://www.linkedin.com/feed/update/urn:li:activity:7494651574732906497/" target="_blank" rel="noopener"><span class="k"><span class="kind com">Community</span><span class="num">2026.08.16</span></span><b>60+ attendees, 6 speakers, 4 hours</b><p>A meetup at UWA Industry Hub with people who have worked across Australia, China, Taiwan, the US, the UK and Germany.</p><span class="f num"><span>♥ 84</span><span class="go">LinkedIn ↗</span></span></a>
